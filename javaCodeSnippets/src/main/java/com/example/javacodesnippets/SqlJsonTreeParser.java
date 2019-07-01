@@ -10,7 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,12 +33,16 @@ public class SqlJsonTreeParser {
             SqlJsonTreeParser app = new SqlJsonTreeParser();
             
             InputStream stream = app.readJsonFile("/sqlJsonExample.json");
-            
-            ObjectMapper MAPPER = new ObjectMapper();
+
             JsonNode root = MAPPER.readTree(stream);
-            JsonNode whereClauseTree = root.get("where");
-            String result = app.buildQuery(whereClauseTree);
-            System.out.println("result = " + result);
+            JsonNode fieldsJson = root.get("fields");
+            List<String> columnList = app.buildColumnsList(fieldsJson);
+            
+            JsonNode conditionsTree = root.get("where");
+            String conditions = app.buildCondition(conditionsTree);
+            
+            System.out.println("columnList = "+ columnList);
+            System.out.println("Condition = " + conditions);
 
         } catch (IOException ex) {
             Logger.getLogger(SqlJsonTreeParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,8 +53,27 @@ public class SqlJsonTreeParser {
         InputStream stream = SqlJsonTreeParser.class.getResourceAsStream(path);
         return stream;
     }
+    
+    public List<String> buildColumnsList(JsonNode node) {
+        List<String> columnsList = new ArrayList<>();
+        
+        if(node.isArray()) {
+            for (final JsonNode objNode : node) {
+                Iterator<Map.Entry<String, JsonNode>> objNodeFields = objNode.fields();
+                    while (objNodeFields.hasNext()) {
+                        Map.Entry<String, JsonNode> objNodeField = objNodeFields.next();
+                        // String key = objNodeField.getKey();
+                        JsonNode objNodeValue = objNodeField.getValue();
+                        
+                        columnsList.add(objNodeValue.toString());
+                    }
+            }
 
-    public String buildQuery(JsonNode tree) {
+        }
+        return columnsList;
+    }
+    
+    public String buildCondition(JsonNode tree) {
         StringBuilder result = new StringBuilder();
         Iterator<Map.Entry<String, JsonNode>> fields = tree.fields();
 
@@ -75,7 +100,7 @@ public class SqlJsonTreeParser {
                                     result.append(column).append(op).append(columnValue);
                                 } else {
                                     //return "(" +result + ") AND (" + buildQuery(objNode) + ")";
-                                    result.append(" AND (").append(buildQuery(objNode)).append(")");
+                                    result.append(" AND (").append(buildCondition(objNode)).append(")");
 
                                 }
                             }
@@ -100,7 +125,7 @@ public class SqlJsonTreeParser {
                                     result.append(column).append(op).append(columnValue);
                                 } else {
                                     // return "(" +result + ") OR (" + buildQuery(objNode) + ")";
-                                    result.append(" OR (").append(buildQuery(objNode)).append(")");
+                                    result.append(" OR (").append(buildCondition(objNode)).append(")");
                                 }
                             }
 

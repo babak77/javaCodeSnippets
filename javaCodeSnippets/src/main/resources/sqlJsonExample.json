@@ -1,9 +1,7 @@
 {
     "fields": [
-        {
-            "column": "SAT_JOBINFO.JobID",
-            "column": "SAT_JOBINFO.JOBNAME"
-        }
+        { "column": "SAT_JOBINFO.JobID"},
+        { "column": "SAT_JOBINFO.JobName"}
     ],
     "where": {
         "AND": [
