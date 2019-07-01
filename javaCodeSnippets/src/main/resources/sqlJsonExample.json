@@ -1,0 +1,104 @@
+{
+    "fields": [
+        {
+            "column": "SAT_JOBINFO.JobID",
+            "column": "SAT_JOBINFO.JOBNAME"
+        }
+    ],
+    "where": {
+        "AND": [
+            {
+                "=": {
+                    "column": "SAT_JOBINFO.JobID",
+                    "columnValue": "1"
+                }
+            },
+            {
+                "=": {
+                    "column": "SAT_JOBINFO.JobID",
+                    "columnValue": "1"
+                }
+            },
+            {
+                "OR": [
+                    {
+                        "=": {
+                            "column": "SAT_JOBINFO.JobID",
+                            "columnValue": "2"
+                        }
+                    },
+                    {
+                        "=": {
+                            "column": "SAT_JOBINFO.JobID",
+                            "columnValue": "2"
+                        }
+                    },
+                    {
+                        "AND": [
+                            {
+                                "=": {
+                                    "column": "SAT_JOBINFO.JobID",
+                                    "columnValue": "3"
+                                }
+                            },
+                            {
+                                "=": {
+                                    "column": "SAT_JOBINFO.JobID",
+                                    "columnValue": "3"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "AND": [
+                    {
+                        "=": {
+                            "column": "SAT_JOBINFO.JobID",
+                            "columnValue": "4"
+                        }
+                    },
+                    {
+                        "=": {
+                            "column": "SAT_JOBINFO.JobID",
+                            "columnValue": "4"
+                        }
+                    },
+                    {
+                        "AND": [
+                            {
+                                "=": {
+                                    "column": "SAT_JOBINFO.JobID",
+                                    "columnValue": "5"
+                                }
+                            },
+                            {
+                                "=": {
+                                    "column": "SAT_JOBINFO.JobID",
+                                    "columnValue": "5"
+                                }
+                            },
+                            {
+                                "AND": [
+                                    {
+                                        "=": {
+                                            "column": "SAT_JOBINFO.JobID",
+                                            "columnValue": "6"
+                                        }
+                                    },
+                                    {
+                                        "=": {
+                                            "column": "SAT_JOBINFO.JobID",
+                                            "columnValue": "6"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
