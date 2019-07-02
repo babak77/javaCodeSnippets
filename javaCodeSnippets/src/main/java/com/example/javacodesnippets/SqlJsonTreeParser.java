@@ -12,9 +12,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * @author  Babak Hashemi 
+ */
 public class SqlJsonTreeParser {
-
+    
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static void main(String[] args) {
@@ -43,6 +45,11 @@ public class SqlJsonTreeParser {
         return stream;
     }
     
+    /**
+    Build column list get JsonNode and convert them to list of columns
+    @param  node    column json node of the tree
+    @return         list of columns 
+    */
     public List<String> buildColumnsList(JsonNode node) {
         List<String> columnsList = new ArrayList<>();
         
@@ -62,6 +69,11 @@ public class SqlJsonTreeParser {
         return columnsList;
     }
     
+    /**
+    Build column list get JsonNode and convert them to list of columns
+    @param  tree    condition json node of the tree
+    @return         string containing the condition part of the statement
+    */
     public String buildCondition(JsonNode tree) {
         StringBuilder result = new StringBuilder();
         Iterator<Map.Entry<String, JsonNode>> fields = tree.fields();
