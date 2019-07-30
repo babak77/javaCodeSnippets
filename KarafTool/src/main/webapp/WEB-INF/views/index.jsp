@@ -139,12 +139,11 @@
                         data : null// "groupId"
                     },
                     { data: "versions", 
-                      render: function (data, type, row) {
-                          console.log(row);
-                        var $select = $("<select class='select form-control'></select>",
+                      render: function (data, type, row, meta) {
+                          console.log(meta);
+                        var $select = $("<select class='select form-control' rowIndex=" + meta.row + " colIndex=" + meta.col + "></select>",
                             {
-                                id: row.artifactId,
-                                value: row.artifactId
+                                id: row.artifactId
                             });
                         $.each(data, function (k, v) {
                             var $option = $("<option></option>",
@@ -158,11 +157,10 @@
                       }
                     },
                     { data: "versions", 
-                      render: function (data, type, row) {
-                        var $select = $("<select class='select form-control'></select>",
+                      render: function (data, type, row, meta) {
+                        var $select = $("<select class='select form-control' rowIndex=" + meta.row + " colIndex=" + meta.col + "></select>",
                           {
-                            id: row.id,
-                            value: row.position
+                            id: row.artifactId
                           });
                         $.each(data, function (k, v) {
                             var $option = $("<option></option>",
@@ -176,11 +174,10 @@
                       }
                     },
                     { data: "versions", 
-                      render: function (data, type, row) {
-                        var $select = $("<select class='select form-control'></select>",
+                      render: function (data, type, row, meta) {
+                        var $select = $("<select class='select form-control' rowIndex=" + meta.row + " colIndex=" + meta.col + "></select>",
                           {
-                            id: row.id,
-                            value: row.position
+                            id: row.artifactId
                           });
                         $.each(data, function (k, v) {
                             var $option = $("<option></option>",
@@ -196,11 +193,10 @@
                     
                     },
                     { data: "versions",  
-                      render: function (data, type, row) {
-                        var $select = $("<select class='select form-control'></select>",
+                      render: function (data, type, row, meta) {
+                        var $select = $("<select class='select form-control' rowIndex=" + meta.row + " colIndex=" + meta.col + "></select>",
                           {
-                            id: row.id,
-                            value: row.position
+                            id: row.artifactId
                           });
                         $.each(data, function (k, v) {
                             var $option = $("<option></option>",
@@ -215,11 +211,10 @@
                       }
                     },
                     { data: "versions",  
-                      render: function (data, type, row) {
-                        var $select = $("<select class='select form-control'></select>",
+                      render: function (data, type, row, meta) {
+                        var $select = $("<select class='select form-control' rowIndex=" + meta.row + " colIndex=" + meta.col + "></select>",
                           {
-                            id: row.id,
-                            value: row.position
+                            id: row.artifactId
                           });
                         $.each(data, function (k, v) {
                             var $option = $("<option></option>",
