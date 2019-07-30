@@ -1,0 +1,58 @@
+/*!
+ * Costum css styles
+ */
+
+.glyphicon
+{
+    font-size: 12px;
+}
+
+.entry{
+  margin:10px;
+}
+.hidden {
+  display: none;
+}
+
+#group-binding-operator {
+    width: 10%;
+}
+.tableContainer{
+  padding: 10px;
+  border-collapse: separate!important;
+  
+}
+
+.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}
+.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} 
+.asteriskField{color: red;}
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('/DokuJob/images/w_load.gif')  
+                50% 50% 
+                no-repeat;
+}
+/*url('http://i.stack.imgur.com/FhHRx.gif') */
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading .modal {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+
+select, option {
+    width:150px;
+}
