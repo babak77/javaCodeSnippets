@@ -136,11 +136,10 @@
                         data : "artifactId"
                     },
                     {
-                        data : null// "groupId"
+                        data : "groupId"
                     },
                     { data: "versions", 
                       render: function (data, type, row, meta) {
-                          console.log(meta);
                         var $select = $("<select class='select form-control' rowIndex=" + meta.row + " colIndex=" + meta.col + "></select>",
                             {
                                 id: row.artifactId

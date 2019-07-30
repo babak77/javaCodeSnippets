@@ -198,16 +198,13 @@ public class NexusTestClient {
             if (versions.isEmpty()) {
                 continue;
             }
-            System.out.println("link = " + link);
-            String linkHref = link.attr("href");
-            String[] linkParts = linkHref.split("/");
-            System.out.println("linkParts = " + linkParts[linkParts.length - 2]);
-            String artifactId = linkParts[linkParts.length - 2];
+            
+            String path=servicePath.toString().substring( url.length() );
+            String[] parts=path.split("/");
 
-            ((ObjectNode) childNode).put("artifactId", artifactId);
-
-            ArrayNode versionsArray = mapper.valueToTree(versions);
-            ((ObjectNode) childNode).put("versions", versionsArray);
+            ((ObjectNode) childNode).put("artifactId", parts[parts.length-1]);
+            ((ObjectNode) childNode).put("groupId", path.substring(1, path.lastIndexOf(parts[parts.length-1])-1).replace('/', '.'));
+            ((ObjectNode) childNode).put("versions", mapper.valueToTree(versions));
 
         }
         if (childNode.has("artifactId")) {
