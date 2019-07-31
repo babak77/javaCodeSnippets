@@ -24,7 +24,7 @@ public class IndexServlet extends HttpServlet {
     List data = new ArrayList();
      public IndexServlet() throws IOException {
        super();
-        NexusTestClient client = new NexusTestClient();
+        NexusClient client = new NexusClient();
 
         // data = client.getData();
         data = client.getDataRecursive();

@@ -39,9 +39,9 @@ import org.jsoup.nodes.Element;
  *
  * @author bhashemi
  */
-public class NexusTestClient {
+public class NexusClient {
 
-    private static final Logger log = Logger.getLogger(NexusTestClient.class.getSimpleName());
+    private static final Logger log = Logger.getLogger(NexusClient.class.getSimpleName());
 
     private static String user = "admin";
     private static String password = "admin";
