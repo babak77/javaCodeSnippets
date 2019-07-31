@@ -39,7 +39,6 @@ public class KarafToolModel {
     }
 
     public void setVersions(String versions) {
-        System.out.println(versions);
         this.versions.add(versions);
     }
 }

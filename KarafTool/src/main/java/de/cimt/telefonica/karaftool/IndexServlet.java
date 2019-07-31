@@ -22,14 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = { "/index"})
 public class IndexServlet extends HttpServlet {
     List data = new ArrayList();
-     public IndexServlet() throws IOException {
-       super();
+    public IndexServlet() throws IOException {
+        super();
         NexusClient client = new NexusClient();
-
-        // data = client.getData();
         data = client.getDataRecursive();
-        
-   }
+
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -63,7 +61,6 @@ public class IndexServlet extends HttpServlet {
             request.setAttribute("data", data);
         }
         request.setAttribute("data", data);
-        System.err.println(data);
         
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp"); 
         dispatcher.forward(request, response);
