@@ -52,7 +52,7 @@ public class NexusTestClient {
     public List getDataRecursive() throws JsonParseException, JsonMappingException, IOException {
         System.out.println(" ====================================== \n");
         ObjectMapper mapper = new ObjectMapper();
-        List result = getDataRecursive1(servicePath); 
+        List result = getDataRecursive2(servicePath); 
         System.out.println("result = " +result);
          return result;
     }
@@ -60,7 +60,7 @@ public class NexusTestClient {
     public List<KarafToolModel> getDataRecursive(WebResource servicePath) throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<KarafToolModel> jobs = new ArrayList<KarafToolModel>();
-        Map map=new HashMap();  
+        HashMap<String, HashMap<String, Object>> result = new HashMap<String, HashMap<String, Object>>();
         String nexusRepoTalend = servicePath.accept(MediaType.APPLICATION_JSON).get(String.class);
         // parse the html string
         Document page = Jsoup.parse(nexusRepoTalend);
@@ -125,14 +125,13 @@ public class NexusTestClient {
         // parse the html string
         Document page = Jsoup.parse(nexusRepoTalend);
         List versions = new ArrayList();
-        JsonNode childNode = mapper.createObjectNode();
+        
         KarafToolModel ktmObject = new KarafToolModel();
-         StringWriter sw = new StringWriter();
+        StringWriter sw = new StringWriter();
         for (Element link : page.select("a")) {
-
+            
             if (link.text().endsWith("/") && link.text().matches("\\d+.\\d+.\\d+.*")) {
-                versions.add(link.text().replace("/", ""));
-                
+                versions.add(link.text().replace("/", ""));                
                 ktmObject.setVersions(link.text().replace("/", ""));
 
             } else if (link.text().endsWith("/") && !link.text().contains(".")) {
@@ -146,31 +145,19 @@ public class NexusTestClient {
             if (versions.isEmpty()) {
                 continue;
             }
+            sw = new StringWriter();
             String path=servicePath.toString().substring( url.length() );
             String[] parts=path.split("/");
             
             ktmObject.setArtifactId(parts[parts.length-1]);
             ktmObject.setGroupId(path.substring(1, path.lastIndexOf(parts[parts.length-1])-1).replace('/', '.'));
             
-           
             mapper.writeValue(sw, ktmObject);
-            System.out.println("value = " + sw);
-//            System.out.println("link = " + link);
-//            String linkHref = link.attr("href");
-//            String[] linkParts = linkHref.split("/");
-//            System.out.println("linkParts = " + linkParts[linkParts.length - 2]);
-//            String artifactId = linkParts[linkParts.length - 2];
-//
-//            ((ObjectNode) childNode).put("artifactId", artifactId);
-//
-//            ArrayNode versionsArray = mapper.valueToTree(versions);
-//            ((ObjectNode) childNode).put("versions", versionsArray);
-            
-            
-            
         }
-        jobs.add(sw);
-
+        if(sw.toString().length() > 0){
+            jobs.add(sw);
+        }
+        
         return jobs;
     }
     
